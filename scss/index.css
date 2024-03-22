@@ -19,5 +19,28 @@ body {
 
 .home {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 80px);
   margin-top: 80px;
+  width: 100%;
+}
+.home .app-desc {
+  width: 50%;
+}
+.home .accordion-parent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+}
+.home .accordion-parent .accordion {
+  width: 80%;
+}
+
+.products-parent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 }/*# sourceMappingURL=index.css.map */

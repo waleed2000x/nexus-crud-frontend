@@ -27,16 +27,17 @@ export default function NavMenu() {
           <Link href="/products">
             <MenubarItem>All Products</MenubarItem>
           </Link>
-          {/* <MenubarSeparator />
+          <MenubarSeparator />
           <MenubarSub>
-            <MenubarSubTrigger>Share</MenubarSubTrigger>
+            <MenubarSubTrigger>Handle Products</MenubarSubTrigger>
             <MenubarSubContent>
-              <MenubarItem>Email link</MenubarItem>
-              <MenubarItem>Messages</MenubarItem>
-              <MenubarItem>Notes</MenubarItem>
+              <MenubarItem>Add Product</MenubarItem>
+              <MenubarItem>Update Product</MenubarItem>
+              <MenubarItem>Find Product</MenubarItem>
             </MenubarSubContent>
           </MenubarSub>
           <MenubarSeparator />
+          {/* 
           <MenubarItem>
             Print... <MenubarShortcut>⌘P</MenubarShortcut>
           </MenubarItem> */}
@@ -106,8 +107,11 @@ export default function NavMenu() {
   );
 }
 const StyledMenubar = styled(Menubar)`
+  display: flex;
+  justify-content: space-evenly;
   background-color: transparent;
   border: none;
+  width: 100%;
 `;
 const StyledMenubarTrigger = styled(MenubarTrigger)`
   color: #fff;

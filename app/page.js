@@ -1,13 +1,12 @@
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import LandingAccordion from "@/components/accordion/Accordion";
 
 export default function Home() {
   return (
     <main className="home">
-      <p>Hello</p>
-      <Button variant="outline">
-        <Link href="/products">All Products</Link>
-      </Button>
+      <div className="accordion-parent">
+        <LandingAccordion />
+      </div>
+      <div className="app-desc"></div>
     </main>
   );
 }

@@ -12,7 +12,7 @@ export default function LandingAccordion() {
         <AccordionItem value="item-1">
           <AccordionTrigger>About this app!</AccordionTrigger>
           <AccordionContent>
-            This application was a practice project for Next.js.
+            This application is a practice project for Next.js.
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-2">

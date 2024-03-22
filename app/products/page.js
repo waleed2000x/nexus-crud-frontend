@@ -1,4 +1,3 @@
-import "./products.css";
 import { GetRequest } from "@/utils/requests";
 import Link from "next/link";
 import {

@@ -10,23 +10,31 @@ export default function LandingAccordion() {
     <div className="accordion">
       <Accordion type="single" collapsible className="w-full text-white">
         <AccordionItem value="item-1">
-          <AccordionTrigger>Is it accessible?</AccordionTrigger>
+          <AccordionTrigger>About this app!</AccordionTrigger>
           <AccordionContent>
-            Yes. It adheres to the WAI-ARIA design pattern.
+            This application was a practice project for Next.js.
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-2">
-          <AccordionTrigger>Is it styled?</AccordionTrigger>
+          <AccordionTrigger>What does this application do?</AccordionTrigger>
           <AccordionContent>
-            Yes. It comes with default styles that matches the other
-            components&apos; aesthetic.
+            It just mutaltes the database by performing CRUD operations.
+          </AccordionContent>
+          <AccordionContent>
+            This application is a side project, just getting familiar with
+            Next.js
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-3">
-          <AccordionTrigger>Is it animated?</AccordionTrigger>
+          <AccordionTrigger>
+            What technologies and tools does this application uses?
+          </AccordionTrigger>
           <AccordionContent>
-            Yes. It&apos;s animated by default, but you can disable it if you
-            prefer.
+            <b>Framework:</b> Next.js
+          </AccordionContent>
+          <AccordionContent>
+            <b>Libraries and Tools:</b>{" "}
+            shadcn-ui/zod/tailwind/scss/styled-components
           </AccordionContent>
         </AccordionItem>
       </Accordion>

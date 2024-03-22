@@ -1,0 +1,22 @@
+$Themeblack: #051118;
+body {
+  background-color: $Themeblack;
+}
+.navbar {
+  position: fixed;
+  top: 0px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 80px;
+  border-bottom: 1px solid #aaa;
+  &-center {
+    display: flex;
+    width: 90%;
+    justify-content: space-between;
+  }
+}
+.home {
+  display: flex;
+  margin-top: 80px;
+}

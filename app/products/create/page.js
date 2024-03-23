@@ -56,68 +56,59 @@ export default function ProductCreate() {
   });
   return (
     <div className="product-create-parent">
-      <Toaster />;
+      <Toaster />
       <Form {...form}>
         <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-8">
           <FormField
             control={form.control}
             name="name"
             render={({ field }) => (
-              <FormItem>
+              <StyledFormItem>
                 <FormLabel className="text-white">Name</FormLabel>
                 <FormControl>
                   <StyledInput placeholder="Name" {...field} />
                 </FormControl>
                 <FormMessage />
-              </FormItem>
+              </StyledFormItem>
             )}
           />
           <FormField
             control={form.control}
             name="detail"
             render={({ field }) => (
-              <FormItem>
+              <StyledFormItem>
                 <FormLabel className="text-white">Details</FormLabel>
                 <FormControl>
                   <StyledInput placeholder="Detail" {...field} />
                 </FormControl>
-                {/* <FormDescription>
-                  This is your public display name.
-                </FormDescription> */}
                 <FormMessage />
-              </FormItem>
+              </StyledFormItem>
             )}
           />
           <FormField
             control={form.control}
             name="price"
             render={({ field }) => (
-              <FormItem>
+              <StyledFormItem>
                 <FormLabel className="text-white">Price</FormLabel>
                 <FormControl>
                   <StyledInput placeholder="Price" {...field} />
                 </FormControl>
-                {/* <FormDescription>
-                  This is your public display name.
-                </FormDescription> */}
                 <FormMessage />
-              </FormItem>
+              </StyledFormItem>
             )}
           />
           <FormField
             control={form.control}
             name="image"
             render={({ field }) => (
-              <FormItem>
+              <StyledFormItem>
                 <FormLabel className="text-white">Image</FormLabel>
                 <FormControl>
                   <StyledInput placeholder="Image" {...field} />
                 </FormControl>
-                {/* <FormDescription>
-                  This is your public display name.
-                </FormDescription> */}
                 <FormMessage />
-              </FormItem>
+              </StyledFormItem>
             )}
           />
           <Button type="submit">Submit</Button>
@@ -128,4 +119,8 @@ export default function ProductCreate() {
 }
 const StyledInput = styled(Input)`
   background-color: transparent;
+  color: white;
+`;
+const StyledFormItem = styled(FormItem)`
+  width: 80%;
 `;

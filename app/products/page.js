@@ -20,21 +20,18 @@ export default async function Products() {
         {allproducts &&
           allproducts.map((product) => {
             return (
-              <Card key={product._id}>
+              <Card className="all-products-card" key={product._id}>
                 <CardHeader>
                   <CardTitle>{product.name}</CardTitle>
-                  <CardDescription>Card Description</CardDescription>
+                  <CardDescription>{product.detail}</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <p>Details: {product.detail}</p>
                   <p>Price: {product.price}</p>
                 </CardContent>
-                <CardFooter>
+                <CardFooter className="all-products-card-footer">
                   <Button variant="outline">
                     <Link href={`/products/${product._id}`}>More Details</Link>
-                  </Button>
-                  <Button variant="outline">
-                    <Link href={`/products/${product._id}/update`}>Update</Link>
                   </Button>
                 </CardFooter>
               </Card>

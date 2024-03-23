@@ -38,16 +38,44 @@ body {
 }
 .products-parent {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 80px;
   min-height: 100vh;
+  .all-products {
+    display: flex;
+    justify-content: space-evenly;
+    width: 80%;
+    flex-wrap: wrap;
+    &-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background-color: rgba(255, 255, 255, 0.08);
+      margin-bottom: 50px;
+      width: 400px;
+      height: 300px;
+      color: white;
+      &-footer {
+        display: flex;
+        justify-content: space-between;
+        & button {
+          color: #051118;
+        }
+      }
+    }
+  }
 }
 .product-create-parent {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  min-height: 800px;
   & form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 35%;
   }
 }

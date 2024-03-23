@@ -18,6 +18,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { toast } from "sonner";
 import styled from "styled-components";
+import UpdateLoading from "./loading";
 const formSchema = z.object({
   name: z.string().min(2).max(50),
   detail: z.string().min(2).max(50),
@@ -62,10 +63,10 @@ export default function ProductUpdate({ params: productId }) {
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: product?.name || "",
-      detail: product?.detail || "",
-      price: product?.price || "",
-      image: product?.image || "",
+      name: "",
+      detail: "",
+      price: "",
+      image: "",
     },
   });
   useEffect(() => {
@@ -77,19 +78,7 @@ export default function ProductUpdate({ params: productId }) {
     });
   }, [product]);
   if (isLoading) {
-    return (
-      <div
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(50%, 50%)",
-          color: "red",
-        }}
-      >
-        Loading...
-      </div>
-    );
+    return <UpdateLoading />;
   }
   return (
     <div className="product-create-parent">
@@ -100,61 +89,52 @@ export default function ProductUpdate({ params: productId }) {
             control={form.control}
             name="name"
             render={({ field }) => (
-              <FormItem>
+              <StyledFormItem>
                 <FormLabel className="text-white">Name</FormLabel>
                 <FormControl>
                   <StyledInput placeholder="Name" {...field} />
                 </FormControl>
                 <FormMessage />
-              </FormItem>
+              </StyledFormItem>
             )}
           />
           <FormField
             control={form.control}
             name="detail"
             render={({ field }) => (
-              <FormItem>
+              <StyledFormItem>
                 <FormLabel className="text-white">Details</FormLabel>
                 <FormControl>
                   <StyledInput placeholder="Detail" {...field} />
                 </FormControl>
-                {/* <FormDescription>
-                  This is your public display name.
-                </FormDescription> */}
                 <FormMessage />
-              </FormItem>
+              </StyledFormItem>
             )}
           />
           <FormField
             control={form.control}
             name="price"
             render={({ field }) => (
-              <FormItem>
+              <StyledFormItem>
                 <FormLabel className="text-white">Price</FormLabel>
                 <FormControl>
                   <StyledInput placeholder="Price" {...field} />
                 </FormControl>
-                {/* <FormDescription>
-                  This is your public display name.
-                </FormDescription> */}
                 <FormMessage />
-              </FormItem>
+              </StyledFormItem>
             )}
           />
           <FormField
             control={form.control}
             name="image"
             render={({ field }) => (
-              <FormItem>
+              <StyledFormItem>
                 <FormLabel className="text-white">Image</FormLabel>
                 <FormControl>
                   <StyledInput placeholder="Image" {...field} />
                 </FormControl>
-                {/* <FormDescription>
-                  This is your public display name.
-                </FormDescription> */}
                 <FormMessage />
-              </FormItem>
+              </StyledFormItem>
             )}
           />
           <Button type="submit">Submit</Button>
@@ -166,4 +146,7 @@ export default function ProductUpdate({ params: productId }) {
 const StyledInput = styled(Input)`
   background-color: transparent;
   color: white;
+`;
+const StyledFormItem = styled(FormItem)`
+  width: 80%;
 `;

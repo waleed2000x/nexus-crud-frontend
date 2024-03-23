@@ -27,15 +27,18 @@ const formSchema = z.object({
 
 export default function ProductUpdate({ params: productId }) {
   const [product, setProduct] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
   const id = productId.productId;
   useEffect(() => {
     axios
       .get(`http://localhost:8000/products/${id}`)
       .then((res) => {
         setProduct(res.data.data.product);
+        setIsLoading(false);
       })
       .catch((err) => {
         console.log(err);
+        setIsLoading(false);
       });
   }, []);
   function handleSubmit(values) {
@@ -43,7 +46,7 @@ export default function ProductUpdate({ params: productId }) {
       axios
         .patch(`http://localhost:8000/products/${id}`, values)
         .then((res) => {
-          toast("Product created successfully");
+          toast("Product updated successfully");
           setTimeout(() => {
             form.reset();
           }, 1000);
@@ -59,12 +62,35 @@ export default function ProductUpdate({ params: productId }) {
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      name: product?.name || "",
+      detail: product?.detail || "",
+      price: product?.price || "",
+      image: product?.image || "",
+    },
+  });
+  useEffect(() => {
+    form.reset({
       name: product.name || "",
       detail: product.detail || "",
       price: product.price || "",
       image: product.image || "",
-    },
-  });
+    });
+  }, [product]);
+  if (isLoading) {
+    return (
+      <div
+        style={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(50%, 50%)",
+          color: "red",
+        }}
+      >
+        Loading...
+      </div>
+    );
+  }
   return (
     <div className="product-create-parent">
       <Toaster />

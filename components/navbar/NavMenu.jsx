@@ -34,15 +34,11 @@ export default function NavMenu() {
               <Link href="/products/create">
                 <MenubarItem>Add Product</MenubarItem>
               </Link>
-              <MenubarItem>Update Product</MenubarItem>
+              <MenubarItem> Product</MenubarItem>
               <MenubarItem>Find Product</MenubarItem>
             </MenubarSubContent>
           </MenubarSub>
           <MenubarSeparator />
-          {/* 
-          <MenubarItem>
-            Print... <MenubarShortcut>⌘P</MenubarShortcut>
-          </MenubarItem> */}
         </MenubarContent>
       </MenubarMenu>
       <MenubarMenu>

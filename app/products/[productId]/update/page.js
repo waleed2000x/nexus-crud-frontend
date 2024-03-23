@@ -1,11 +1,11 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Toaster } from "@/components/ui/sonner";
 import {
   Form,
   FormControl,
-  FormDescription,
+  // FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -25,17 +25,28 @@ const formSchema = z.object({
   image: z.string().min(2).max(50),
 });
 
-export default function ProductCreate() {
+export default function ProductUpdate({ params: productId }) {
+  const [product, setProduct] = useState({});
+  const id = productId.productId;
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8000/products/${id}`)
+      .then((res) => {
+        setProduct(res.data.data.product);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   function handleSubmit(values) {
     try {
       axios
-        .post("http://localhost:8000/products/", values)
+        .patch(`http://localhost:8000/products/${id}`, values)
         .then((res) => {
           toast("Product created successfully");
           setTimeout(() => {
             form.reset();
           }, 1000);
-          console.log(res);
         })
         .catch((err) => {
           console.log(err);
@@ -48,15 +59,15 @@ export default function ProductCreate() {
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
-      detail: "",
-      price: "",
-      image: "",
+      name: product.name || "",
+      detail: product.detail || "",
+      price: product.price || "",
+      image: product.image || "",
     },
   });
   return (
     <div className="product-create-parent">
-      <Toaster />;
+      <Toaster />
       <Form {...form}>
         <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-8">
           <FormField
@@ -128,4 +139,5 @@ export default function ProductCreate() {
 }
 const StyledInput = styled(Input)`
   background-color: transparent;
+  color: white;
 `;

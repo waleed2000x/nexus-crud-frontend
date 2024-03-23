@@ -13,18 +13,12 @@ import { Button } from "@/components/ui/button";
 export default async function Products() {
   const productsData = await GetRequest("http://localhost:8000/products/");
   const allproducts = productsData?.data?.allProducts;
-  //   console.log(allproducts);
   return (
     <div className="products-parent">
       <p>Products</p>
       <div className="all-products">
         {allproducts &&
           allproducts.map((product) => {
-            {
-              /* <div className="product">
-                <p>Image: {product.image}</p>
-              </div> */
-            }
             return (
               <Card key={product._id}>
                 <CardHeader>
@@ -38,6 +32,9 @@ export default async function Products() {
                 <CardFooter>
                   <Button variant="outline">
                     <Link href={`/products/${product._id}`}>More Details</Link>
+                  </Button>
+                  <Button variant="outline">
+                    <Link href={`/products/${product._id}/update`}>Update</Link>
                   </Button>
                 </CardFooter>
               </Card>

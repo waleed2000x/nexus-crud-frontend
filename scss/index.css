@@ -53,4 +53,10 @@ body {
 }
 .product-create-parent form {
   width: 35%;
+}
+
+.product-parent {
+  display: flex;
+  margin-top: 80px;
+  color: white;
 }/*# sourceMappingURL=index.css.map */

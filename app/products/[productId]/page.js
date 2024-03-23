@@ -6,9 +6,10 @@ export default async function Product({ params: { productId } }) {
     `http://localhost:8000/products/${productId}`
   );
   const product = productsData?.data?.product;
+  console.log(product);
   return (
     <div className="product-parent">
-      <div className="product">
+      <div className="one-product">
         <p>{product.image}</p>
         <p>{product.name}</p>
         <p>{product.detail}</p>

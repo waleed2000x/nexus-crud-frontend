@@ -22,9 +22,7 @@ export default function Navbar() {
       <div className="navbar-center">
         <StyledDrawer>
           <StyledDrawerTrigger>
-            <Button variant="ghost" size="icon">
-              <PanelBottom />
-            </Button>
+            <PanelBottom />
             <Link href="/">
               <h2>Nextjs Products</h2>
             </Link>
@@ -55,19 +53,18 @@ const StyledDrawer = styled(Drawer)``;
 const StyledDrawerTrigger = styled(DrawerTrigger)`
   display: flex;
   align-items: center;
-  & button {
-    & svg {
-      color: white;
-      width: 30px;
-      height: 30px;
-      &:hover {
-        color: #aaa;
-      }
-    }
+  & svg {
+    color: white;
+    width: 30px;
+    height: 30px;
     &:hover {
-      background-color: transparent;
+      color: #aaa;
     }
   }
+  &:hover {
+    background-color: transparent;
+  }
+
   & h2 {
     color: white;
     margin-left: 20px;

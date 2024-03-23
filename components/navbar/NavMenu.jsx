@@ -31,7 +31,9 @@ export default function NavMenu() {
           <MenubarSub>
             <MenubarSubTrigger>Handle Products</MenubarSubTrigger>
             <MenubarSubContent>
-              <MenubarItem>Add Product</MenubarItem>
+              <Link href="/products/create">
+                <MenubarItem>Add Product</MenubarItem>
+              </Link>
               <MenubarItem>Update Product</MenubarItem>
               <MenubarItem>Find Product</MenubarItem>
             </MenubarSubContent>

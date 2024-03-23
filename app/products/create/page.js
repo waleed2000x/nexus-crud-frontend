@@ -1,6 +1,7 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Toaster } from "@/components/ui/sonner";
 import {
   Form,
   FormControl,
@@ -15,20 +16,36 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
+import { toast } from "sonner";
+import styled from "styled-components";
 const formSchema = z.object({
   name: z.string().min(2).max(50),
-  details: z.string().min(2).max(50),
+  detail: z.string().min(2).max(50),
   price: z.string().min(2).max(50),
   image: z.string().min(2).max(50),
 });
 
 export default function Product() {
-  function onSubmit(e) {
-    e.preventDefault();
+  const [fire, setFire] = useState(false);
+  function handleSubmit(values) {
+    try {
+      axios
+        .post("http://localhost:8000/products/", values)
+        .then((res) => {
+          toast("Product created successfully");
+          setTimeout(() => {
+            form.reset();
+          }, 1000);
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      console.log(values);
+    } catch (error) {
+      console.log(error);
+    }
   }
-  useEffect(() => {
-    axios.post("http://localhost:8000/products", form);
-  }, []);
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -40,20 +57,66 @@ export default function Product() {
   });
   return (
     <div className="product-create-parent">
+      <Toaster />;
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-8">
           <FormField
             control={form.control}
-            name="username"
+            name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Username</FormLabel>
+                <FormLabel className="text-white">Name</FormLabel>
                 <FormControl>
-                  <Input placeholder="shadcn" {...field} />
+                  <StyledInput placeholder="Name" {...field} />
                 </FormControl>
-                <FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="detail"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-white">Details</FormLabel>
+                <FormControl>
+                  <StyledInput placeholder="Detail" {...field} />
+                </FormControl>
+                {/* <FormDescription>
                   This is your public display name.
-                </FormDescription>
+                </FormDescription> */}
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="price"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-white">Price</FormLabel>
+                <FormControl>
+                  <StyledInput placeholder="Price" {...field} />
+                </FormControl>
+                {/* <FormDescription>
+                  This is your public display name.
+                </FormDescription> */}
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="image"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-white">Image</FormLabel>
+                <FormControl>
+                  <StyledInput placeholder="Image" {...field} />
+                </FormControl>
+                {/* <FormDescription>
+                  This is your public display name.
+                </FormDescription> */}
                 <FormMessage />
               </FormItem>
             )}
@@ -64,3 +127,6 @@ export default function Product() {
     </div>
   );
 }
+const StyledInput = styled(Input)`
+  background-color: transparent;
+`;

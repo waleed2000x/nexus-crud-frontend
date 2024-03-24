@@ -1,5 +1,6 @@
 export async function GetRequest(url) {
   const response = await fetch(url, {
+    cache: "no-store",
     method: "GET",
     headers: {
       "Content-Type": "application/json",

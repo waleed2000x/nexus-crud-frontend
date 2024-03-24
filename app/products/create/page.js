@@ -18,6 +18,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { toast } from "sonner";
 import styled from "styled-components";
+import { useRouter } from "next/navigation";
 const formSchema = z.object({
   name: z.string().min(2).max(50),
   detail: z.string().min(2).max(50),
@@ -26,6 +27,7 @@ const formSchema = z.object({
 });
 
 export default function ProductCreate() {
+  const router = useRouter();
   function handleSubmit(values) {
     try {
       axios
@@ -34,6 +36,7 @@ export default function ProductCreate() {
           toast("Product created successfully");
           setTimeout(() => {
             form.reset();
+            router.push("/products");
           }, 1000);
           console.log(res);
         })

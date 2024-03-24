@@ -1,5 +1,5 @@
 import { GetRequest } from "@/utils/requests";
-import DeleteDialog from "./deleteDialog";
+import DeleteDialog from "./DeleteDialog";
 
 export default async function Product({ params: { productId } }) {
   const productsData = await GetRequest(

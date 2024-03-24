@@ -11,15 +11,14 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { DeleteRequest } from "@/utils/requests";
-import { useRouter } from "next/navigation";
-
+// import { useRouter } from "next/router";
 export default function DeleteDialog({ id }) {
-  const router = useRouter();
+  // const router = useRouter();
   const deleteProduct = async () => {
     try {
       await DeleteRequest(`http://localhost:8000/products/${id}`)
         .then((res) => {
-          router.push("/products");
+          // router.push("/products");
           console.log(res);
         })
         .catch((e) => console.log(e));

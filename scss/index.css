@@ -64,7 +64,7 @@ body {
 }
 .products-parent .all-products-card-footer {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
 }
 .products-parent .all-products-card-footer button {
   color: #051118;

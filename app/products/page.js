@@ -30,9 +30,9 @@ export default async function Products() {
                   <p>Price: {product.price}</p>
                 </CardContent>
                 <CardFooter className="all-products-card-footer">
-                  <Button variant="outline">
-                    <Link href={`/products/${product._id}`}>More Details</Link>
-                  </Button>
+                  <Link href={`/products/${product._id}`}>
+                    <Button variant="outline">More Details</Button>
+                  </Link>
                 </CardFooter>
               </Card>
             );

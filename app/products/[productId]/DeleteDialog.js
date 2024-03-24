@@ -10,10 +10,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
 import { DeleteRequest } from "@/utils/requests";
 import { useRouter } from "next/navigation";
-import axios from "axios";
 
 export default function DeleteDialog({ id }) {
   const router = useRouter();

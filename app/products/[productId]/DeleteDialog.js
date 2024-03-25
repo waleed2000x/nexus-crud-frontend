@@ -12,12 +12,13 @@ import {
 } from "@/components/ui/dialog";
 import { DeleteRequest } from "@/utils/requests";
 import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
 
 export default function DeleteDialog({ id }) {
   const router = useRouter();
   const deleteProduct = async () => {
     try {
-      await DeleteRequest(`http://localhost:8000/products/${id}`)
+      await DeleteRequest(`http://localhost:8000/products/${id}/`)
         .then((res) => {
           router.push("/products");
           console.log(res);
@@ -29,7 +30,9 @@ export default function DeleteDialog({ id }) {
   };
   return (
     <Dialog>
-      <DialogTrigger>Delete</DialogTrigger>
+      <DialogTrigger className="bg-black mt-[15px] text-white hover:bg-gray-900 py-2 px-5 rounded">
+        Delete
+      </DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Are you absolutely sure?</DialogTitle>

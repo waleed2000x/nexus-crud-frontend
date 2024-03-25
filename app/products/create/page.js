@@ -1,7 +1,13 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Toaster } from "@/components/ui/sonner";
+import {
+  ref,
+  uploadBytesResumable,
+  getDownloadURL, // Import getDownloadURL from firebase storage
+} from "firebase/storage";
+import { storage } from "../../firebase";
 import {
   Form,
   FormControl,
@@ -19,19 +25,66 @@ import axios from "axios";
 import { toast } from "sonner";
 import styled from "styled-components";
 import { useRouter } from "next/navigation";
+import { Progress } from "@/components/ui/progress";
+
 const formSchema = z.object({
   name: z.string().min(2).max(50),
   detail: z.string().min(2).max(50),
   price: z.string().min(2).max(50),
-  image: z.string().min(2).max(50),
 });
 
 export default function ProductCreate() {
+  const [image, setImage] = useState("");
+  const [imageProgress, setImageProgress] = useState(false);
+  const [imageProgressValue, setImageProgressValue] = useState(false);
   const router = useRouter();
+
+  const form = useForm({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      detail: "",
+      price: "",
+    },
+  });
+
+  console.log(form.formState.isValid);
+  const handleImageUpload = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      const imageFile = e.target.files[0];
+      const storageRef = ref(storage, imageFile.name);
+      const uploadTask = uploadBytesResumable(storageRef, imageFile);
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          // console.log(progress + "%");
+          setImageProgress(progress);
+          setImageProgressValue(progress);
+        },
+        (error) => {
+          console.error(error);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            console.log("File available at", downloadURL);
+            // form.setValue("image", downloadURL);
+            setImage(downloadURL);
+          });
+        }
+      );
+    }
+  };
+
   function handleSubmit(values) {
+    console.log("values");
     try {
       axios
-        .post("http://localhost:8000/products/", values)
+        .post("http://localhost:8000/products/", {
+          ...values,
+          image,
+        })
         .then((res) => {
           toast("Product created successfully");
           setTimeout(() => {
@@ -48,20 +101,15 @@ export default function ProductCreate() {
       console.log(error);
     }
   }
-  const form = useForm({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: "",
-      detail: "",
-      price: "",
-      image: "",
-    },
-  });
+
   return (
     <div className="product-create-parent">
       <Toaster />
       <Form {...form}>
         <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-8">
+          <FormDescription>
+            You will not be able to submit the form until all Fields are filled
+          </FormDescription>
           <FormField
             control={form.control}
             name="name"
@@ -69,7 +117,7 @@ export default function ProductCreate() {
               <StyledFormItem>
                 <FormLabel className="text-white">Name</FormLabel>
                 <FormControl>
-                  <StyledInput placeholder="Name" {...field} />
+                  <Input placeholder="Name" {...field} />
                 </FormControl>
                 <FormMessage />
               </StyledFormItem>
@@ -82,7 +130,7 @@ export default function ProductCreate() {
               <StyledFormItem>
                 <FormLabel className="text-white">Details</FormLabel>
                 <FormControl>
-                  <StyledInput placeholder="Detail" {...field} />
+                  <Input placeholder="Detail" {...field} />
                 </FormControl>
                 <FormMessage />
               </StyledFormItem>
@@ -95,35 +143,33 @@ export default function ProductCreate() {
               <StyledFormItem>
                 <FormLabel className="text-white">Price</FormLabel>
                 <FormControl>
-                  <StyledInput placeholder="Price" {...field} />
+                  <Input placeholder="Price" {...field} />
                 </FormControl>
                 <FormMessage />
               </StyledFormItem>
             )}
           />
-          <FormField
-            control={form.control}
-            name="image"
-            render={({ field }) => (
-              <StyledFormItem>
-                <FormLabel className="text-white">Image</FormLabel>
-                <FormControl>
-                  <StyledInput placeholder="Image" {...field} />
-                </FormControl>
-                <FormMessage />
-              </StyledFormItem>
-            )}
-          />
-          <Button type="submit">Submit</Button>
+          <div style={{ width: "80%" }}>
+            <FormLabel className="text-white">Image</FormLabel>
+            <Input
+              className="mt-2 text-white"
+              onChange={handleImageUpload}
+              type="file"
+              placeholder="Image"
+            />
+          </div>
+          <Progress value={imageProgressValue} />
+          <Button
+            type="submit"
+            disabled={imageProgress !== 100 && !form.formState.isValid}
+          >
+            Submit
+          </Button>
         </form>
       </Form>
     </div>
   );
 }
-const StyledInput = styled(Input)`
-  background-color: transparent;
-  color: white;
-`;
 const StyledFormItem = styled(FormItem)`
   width: 80%;
 `;

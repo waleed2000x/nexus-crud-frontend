@@ -9,6 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 export default async function Products() {
   const productsData = await GetRequest("http://localhost:8000/products/");
@@ -22,6 +23,7 @@ export default async function Products() {
             return (
               <Card className="all-products-card" key={product._id}>
                 <CardHeader>
+                  <img src={product.image} alt={product.name + "img"} />
                   <CardTitle>{product.name}</CardTitle>
                   <CardDescription>{product.detail}</CardDescription>
                 </CardHeader>

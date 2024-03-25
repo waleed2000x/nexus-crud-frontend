@@ -87,5 +87,15 @@ body {
 .product-parent {
   display: flex;
   margin-top: 80px;
+  width: 100%;
   color: white;
+  height: calc(100vh - 80px);
+}
+.product-parent .one-product {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: -moz-min-content;
+  height: min-content;
 }/*# sourceMappingURL=index.css.map */

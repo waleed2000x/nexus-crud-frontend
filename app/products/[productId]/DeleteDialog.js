@@ -12,7 +12,6 @@ import {
 } from "@/components/ui/dialog";
 import { DeleteRequest } from "@/utils/requests";
 import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
 
 export default function DeleteDialog({ id }) {
   const router = useRouter();

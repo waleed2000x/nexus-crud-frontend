@@ -1,5 +1,4 @@
 import LandingAccordion from "@/components/accordion/Accordion";
-
 export default function Home() {
   return (
     <main className="home">

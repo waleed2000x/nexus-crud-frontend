@@ -23,7 +23,11 @@ export default async function Products() {
             return (
               <Card className="all-products-card" key={product._id}>
                 <CardHeader>
-                  <img src={product.image} alt={product.name + "img"} />
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="rounded"
+                  />
                   <CardTitle>{product.name}</CardTitle>
                   <CardDescription>{product.detail}</CardDescription>
                 </CardHeader>

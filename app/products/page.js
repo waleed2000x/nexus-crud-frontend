@@ -26,7 +26,7 @@ export default async function Products() {
                   <img
                     src={product.image}
                     alt={product.name}
-                    className="rounded"
+                    className="rounded my-[15px]"
                   />
                   <CardTitle>{product.name}</CardTitle>
                   <CardDescription>{product.detail}</CardDescription>

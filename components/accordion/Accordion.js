@@ -30,11 +30,17 @@ export default function LandingAccordion() {
             What technologies and tools does this application uses?
           </AccordionTrigger>
           <AccordionContent>
-            <b>Framework:</b> Next.js
+            <b>Frontend Framework:</b> Next.js
           </AccordionContent>
           <AccordionContent>
             <b>Libraries and Tools:</b>{" "}
             shadcn-ui/zod/tailwind/scss/styled-components
+          </AccordionContent>
+          <AccordionContent>
+            <b>Backend Framework:</b> Express.js
+          </AccordionContent>
+          <AccordionContent>
+            <b>Libraries and Tools:</b> morgan/axios/cors/mongoose
           </AccordionContent>
         </AccordionItem>
       </Accordion>

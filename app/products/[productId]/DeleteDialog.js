@@ -19,10 +19,14 @@ export default function DeleteDialog({ id }) {
     try {
       await DeleteRequest(`http://localhost:8000/products/${id}/`)
         .then((res) => {
-          router.push("/products");
           console.log(res);
         })
-        .catch((e) => console.log(e));
+        .catch((e) => console.log("error: " + e))
+        .finally(() => {
+          console.log("redirecting");
+          router.push("/products");
+          // redirect("/products");
+        });
     } catch (error) {
       console.log(error);
     }

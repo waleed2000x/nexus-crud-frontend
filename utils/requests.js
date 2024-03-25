@@ -1,9 +1,9 @@
 export async function GetRequest(url) {
   const response = await fetch(url, {
-    cache: "no-store",
-    // next: {
-    // revalidate: 5,
-    // },
+    // cache: "no-store",
+    next: {
+      revalidate: 5,
+    },
     method: "GET",
     headers: {
       "Content-Type": "application/json",

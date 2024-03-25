@@ -27,6 +27,9 @@ body {
   width: 100%;
 }
 .home .app-desc {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 50%;
 }
 .home .accordion-parent {
@@ -60,7 +63,7 @@ body {
   justify-content: center;
   background-color: rgba(255, 255, 255, 0.08);
   margin: 50px 0px;
-  max-height: 600px;
+  max-height: 650px;
   width: 350px;
   color: white;
 }

@@ -29,7 +29,7 @@ import { Progress } from "@/components/ui/progress";
 
 const formSchema = z.object({
   name: z.string().min(2).max(50),
-  detail: z.string().min(2).max(50),
+  detail: z.string().min(2).max(100),
   price: z.string().min(2).max(50),
 });
 
@@ -47,8 +47,6 @@ export default function ProductCreate() {
       price: "",
     },
   });
-
-  console.log(form.formState.isValid);
   const handleImageUpload = (e) => {
     if (e.target.files && e.target.files[0]) {
       const imageFile = e.target.files[0];

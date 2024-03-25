@@ -41,7 +41,12 @@ export default function DeleteDialog({ id }) {
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
-          <DialogClose onClick={deleteProduct}>Delete</DialogClose>
+          <DialogClose
+            className="bg-red-500 px-6 py-2 text-white rounded"
+            onClick={deleteProduct}
+          >
+            Delete
+          </DialogClose>
         </DialogFooter>
       </DialogContent>
     </Dialog>
